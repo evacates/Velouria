@@ -1,0 +1,64 @@
+apiVersion: ssu/v1
+nlu:
+  shortcuts:
+    bundleIdentifier: com.evacates.dosey
+    intents:
+    - metadata:
+        name: DoseySummaryIntent_0
+        title: Ask Velouria
+      corpuses:
+        training:
+        - locale: en
+          utterances:
+          - '{${+prefix} }Ask ${+applicationName} what meds are left'
+          - '{${+prefix} }Ask ${+applicationName} did I take my pill'
+          - '{${+prefix} }${+applicationName} check in'
+        - locale: Base
+          utterances:
+          - Ask ${+applicationName} what meds are left
+          - Ask ${+applicationName} did I take my pill
+          - ${+applicationName} check in
+    - metadata:
+        name: DoseyOpenTodayIntent_1
+        title: Open Velouria Today
+      corpuses:
+        training:
+        - locale: en
+          utterances:
+          - '{${+prefix} }Open ${+applicationName} today'
+          - '{${+prefix} }Show my ${+applicationName} doses'
+        - locale: Base
+          utterances:
+          - Open ${+applicationName} today
+          - Show my ${+applicationName} doses
+    - metadata:
+        name: +negative
+      corpuses:
+        training:
+        - locale: en
+          utterances:
+          - '{${+prefix} }${+standardAppShortcutNegatives}'
+        - locale: Base
+          utterances: []
+variables:
+- name: +applicationName
+  type: ssu/expansion
+  definitions:
+  - locale: en
+    synomyms:
+    - Velouria
+  - locale: Base
+    synomyms:
+    - Velouria
+- name: +prefix
+  type: ssu/expansion
+  definitions:
+  - locale: en
+    synomyms:
+      $ref: ssu://Resources/prefix/en.yaml
+- name: +standardAppShortcutNegatives
+  type: ssu/expansion
+  definitions:
+  - locale: en
+    synomyms:
+      $ref: ssu://Resources/standardAppShortcutNegatives/en.yaml
